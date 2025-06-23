@@ -180,13 +180,13 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 ">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="video">Video Performance</TabsTrigger>
-            <TabsTrigger value="monthly">Monthly Trends</TabsTrigger>
-            <TabsTrigger value="revenue">Revenue Deep Dive</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 mb-6 shadow shadow-black/10 dark:shadow-black/30">
+            <TabsTrigger className="text-zinc-500 dark:text-zinc-400" value="overview">Overview</TabsTrigger>
+            <TabsTrigger className="text-zinc-500 dark:text-zinc-400" value="video">Video Performance</TabsTrigger>
+            <TabsTrigger  className="text-zinc-500 dark:text-zinc-400" value="monthly">Monthly Trends</TabsTrigger>
+            <TabsTrigger className="text-zinc-500 dark:text-zinc-400" value="revenue">Revenue Deep Dive</TabsTrigger>
           </TabsList>
           
           <TabsContent value="overview">
