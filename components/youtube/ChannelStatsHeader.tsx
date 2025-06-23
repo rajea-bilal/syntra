@@ -2,17 +2,17 @@
 
 import { Card } from "@/components/ui/Card";
 import { Eye, Users, Video } from "lucide-react";
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { YouTubeChannelStatistics } from '@/services/youtubeApi';
-import { MetricCard } from '@/components/metrics/MetricCard';
-import YouTubeApiService from '@/services/youtubeApi';
+import YouTubeApiService, { YouTubeChannelStatistics } from '@/services/youtubeApi';
 
-interface ChannelStatsHeaderProps {
-  stats: YouTubeChannelStatistics | null;
-  isLoading: boolean;
+interface StatCardProps {
+  icon: React.ReactElement;
+  label: string;
+  value: string;
 }
 
-const StatCard = ({ icon, label, value }: { icon: React.ReactNode, label: string, value: string }) => (
+const StatCard = ({ icon, label, value }: StatCardProps) => (
   <Card className="p-4 flex flex-col items-center justify-center">
     <div className="flex items-center gap-4">
       {icon}
@@ -23,6 +23,11 @@ const StatCard = ({ icon, label, value }: { icon: React.ReactNode, label: string
     </div>
   </Card>
 );
+
+interface ChannelStatsHeaderProps {
+  stats: YouTubeChannelStatistics | null;
+  isLoading: boolean;
+}
 
 const ChannelStatsHeader: React.FC<ChannelStatsHeaderProps> = ({ stats, isLoading }) => {
   if (isLoading) {

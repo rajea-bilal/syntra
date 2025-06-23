@@ -9,7 +9,6 @@ import { MonthlyMetricsTable } from "@/components/metrics/MonthlyMetricsTable";
 import { VideoAnalyticsTable } from '@/components/youtube/VideoAnalyticsTable';
 import { CombinedVideoData, YouTubeVideo, VideoPerformance } from '@/types/youtube';
 import { generateMockVideoPerformance } from "@/mockData/generateMockVideoPerformance";
-import { SingleMetricBarChart } from "@/components/metrics/SingleMetricBarChart";
 import { useQuery } from "@tanstack/react-query";
 import { generateMockAttribution } from "@/mockData/generateMockAttribution";
 import { Card } from '@/components/ui/Card';

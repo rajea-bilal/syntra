@@ -9,7 +9,7 @@ interface Column {
 // Props: columns (array of {key, label}), data (array of objects), loading (bool)
 interface MetricsTableProps {
   columns: Column[];
-  data: Record<string, any>[];
+  data: Array<Record<string, string | number>>;
   loading?: boolean;
 }
 
@@ -19,11 +19,14 @@ export default function MetricsTable({ columns, data, loading }: MetricsTablePro
   const [sortAsc, setSortAsc] = useState(true);
 
   // Sort data if needed
-  let sortedData = [...data];
+  const sortedData = [...data];
   if (sortKey) {
     sortedData.sort((a, b) => {
-      if (a[sortKey] < b[sortKey]) return sortAsc ? -1 : 1;
-      if (a[sortKey] > b[sortKey]) return sortAsc ? 1 : -1;
+      const valA = a[sortKey];
+      const valB = b[sortKey];
+
+      if (valA < valB) return sortAsc ? -1 : 1;
+      if (valA > valB) return sortAsc ? 1 : -1;
       return 0;
     });
   }

@@ -47,12 +47,12 @@ export function MonthlyBarChart({ data }: MonthlyBarChartProps) {
   const axisColor = theme === 'dark' ? '#888' : '#aaa';
   const gridColor = theme === 'dark' ? '#444' : '#eee';
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: { value: number, color: string, dataKey: string }[], label?: string }) => {
     if (active && payload && payload.length) {
       return (
         <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm shadow-lg">
           <p className="font-bold">{label}</p>
-          {payload.map((pld: any) => (
+          {payload.map((pld) => (
             <div key={pld.dataKey} style={{ color: pld.color }}>
               {`${pld.dataKey}: ${pld.value.toLocaleString()}`}
             </div>
@@ -83,12 +83,7 @@ export function MonthlyBarChart({ data }: MonthlyBarChartProps) {
             <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
             <XAxis dataKey="month" stroke={axisColor} fontSize={12} />
             <YAxis stroke={axisColor} fontSize={12} />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: theme === 'dark' ? '#222' : '#fff',
-                borderColor: theme === 'dark' ? '#444' : '#ccc',
-          }}
-            />
+            <Tooltip content={<CustomTooltip />} />
             <Legend wrapperStyle={{fontSize: "12px"}}/>
             <Bar dataKey="YouTube Views" fill={theme === 'dark' ? BAR_COLORS.dark.views : BAR_COLORS.light.views} radius={[4, 4, 0, 0]}/>
             <Bar dataKey="Visitors" fill={theme === 'dark' ? BAR_COLORS.dark.visitors : BAR_COLORS.light.visitors} radius={[4, 4, 0, 0]}/>

@@ -1,6 +1,6 @@
 'use client';
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useTheme } from 'next-themes';
 import { Card } from '../ui/Card';
 import { MonthlyMetrics } from '../../types/metrics';

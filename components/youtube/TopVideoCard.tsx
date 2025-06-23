@@ -2,7 +2,6 @@
 
 import { Card } from '@/components/ui/Card';
 import { CombinedVideoData } from '@/types/youtube';
-import { formatValue } from '@/lib/utils';
 
 interface TopVideoCardProps {
   video: CombinedVideoData | null;

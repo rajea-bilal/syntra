@@ -41,7 +41,7 @@ export const FunnelChart = ({ totalViews }: FunnelChartProps) => {
     { name: 'Closed', value: Math.max(1, Math.round(closed)) },
   ].reverse(); // Reverse for top-to-bottom display
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
     return (

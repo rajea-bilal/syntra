@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MonthlyMetrics } from "../../types/metrics";
 import { Card } from "../ui/Card";
-import { formatValue, getMonthName } from "../../lib/utils";
+import { formatValue } from "../../lib/utils";
 import {
   Table,
   TableBody,
@@ -41,7 +41,7 @@ const columns = [
 //
 // Use this table to see all your stats in detail, month by month.
 
-export function MonthlyMetricsTable({ data }: MonthlyMetricsTableProps) {
+export const MonthlyMetricsTable = ({ data }: MonthlyMetricsTableProps) => {
   const [sortKey, setSortKey] = useState<string>("month");
   const [sortAsc, setSortAsc] = useState<boolean>(true);
 
@@ -109,36 +109,36 @@ export function MonthlyMetricsTable({ data }: MonthlyMetricsTableProps) {
               <TableRow key={metric.month} className="even:bg-zinc-50 dark:even:bg-zinc-900">
                 <TableCell className="font-medium text-left">{metric.month}</TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.youtubeTotalViews, 'number')}
-                    <ChangeCell value={metric.changes?.youtubeTotalViews} />
+                  {formatValue(metric.youtubeTotalViews, 'number')}
+                  <ChangeCell value={metric.changes?.youtubeTotalViews ?? 0} />
                 </TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.youtubeUniqueViews, 'number')}
-                    <ChangeCell value={metric.changes?.youtubeUniqueViews} />
+                  {formatValue(metric.youtubeUniqueViews, 'number')}
+                  <ChangeCell value={metric.changes?.youtubeUniqueViews ?? 0} />
                 </TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.uniqueWebsiteVisitors, 'number')}
-                    <ChangeCell value={metric.changes?.uniqueWebsiteVisitors} />
+                  {formatValue(metric.uniqueWebsiteVisitors, 'number')}
+                  <ChangeCell value={metric.changes?.uniqueWebsiteVisitors ?? 0} />
                 </TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.totalCallsBooked, 'number')}
-                    <ChangeCell value={metric.changes?.totalCallsBooked} />
+                  {formatValue(metric.totalCallsBooked, 'number')}
+                  <ChangeCell value={metric.changes?.totalCallsBooked ?? 0} />
                 </TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.acceptedCalls, 'number')}
-                    <ChangeCell value={metric.changes?.acceptedCalls} />
+                  {formatValue(metric.acceptedCalls, 'number')}
+                  <ChangeCell value={metric.changes?.acceptedCalls ?? 0} />
                 </TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.newCashCollected.paidInFull, 'currency')}
-                    <ChangeCell value={metric.changes?.paidInFull} />
+                  {formatValue(metric.newCashCollected.paidInFull, 'currency')}
+                  <ChangeCell value={metric.changes?.newCashCollected?.paidInFull ?? 0} />
                 </TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.newCashCollected.installments, 'currency')}
-                    <ChangeCell value={metric.changes?.installments} />
+                  {formatValue(metric.newCashCollected.installments, 'currency')}
+                  <ChangeCell value={metric.changes?.newCashCollected?.installments ?? 0} />
                 </TableCell>
                 <TableCell className="text-right">
-                    {formatValue(metric.totalCashCollected, 'currency')}
-                    <ChangeCell value={metric.changes?.totalCashCollected} />
+                  {formatValue(metric.totalCashCollected, 'currency')}
+                  <ChangeCell value={metric.changes?.newCashCollected?.total ?? 0} />
                 </TableCell>
               </TableRow>
             ))}
