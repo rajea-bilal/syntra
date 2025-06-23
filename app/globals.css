@@ -162,3 +162,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+.dashboard-gradient-bg {
+  background-image: linear-gradient(
+    to top,
+    #F5E1D8 0%,
+    #EFEAE8 40%,
+    #F1DEE5 60%,
+    #E6E3EB 80%,
+    #D1DFF0 100%
+  );
+  background-color: #fff;
+}
+.dark .dashboard-gradient-bg {
+  background-image: none !important;
+  background-color: #1B1B1D !important;
+}
