@@ -5,9 +5,11 @@ import { ReactNode } from 'react';
  * Use for stats, charts, or any content block.
  */
 export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
+  // Only add bg-card if no custom bg- class is present
+  const hasCustomBg = className.includes('bg-');
   return (
-    <div className={`rounded-lg border border-zinc-200 dark:border-zinc-800 bg-card shadow-md shadow-black/5 dark:shadow-lg dark:shadow-black/30 p-4 ${className}`}>
+    <div className={`rounded-lg dark:bg-[#202022] shadow-md shadow-black/5 p-4 ${hasCustomBg ? '' : 'bg-card'} ${className}`}>
       {children}
     </div>
   );
-} 
+}

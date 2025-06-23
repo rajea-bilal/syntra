@@ -63,23 +63,21 @@ export function MetricCard({ title, value, previousValue, format = "number", cap
   const styles = variantStyles[variant];
 
   return (
-    <Card className={`${styles.bg} p-4 flex items-stretch`}>
-      <div className={`w-1 ${styles.border} dark:hidden rounded-full mr-4`}></div>
+    <Card className={`bg-white/60 backdrop-blur-lg border border-white/30 shadow-md rounded-2xl p-4 flex items-stretch `}>
+      <div className={`w-1  dark:hidden rounded-full mr-4`}></div>
       <div className="flex-1 flex flex-col justify-center">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">{title}</p>
+        <p className="text-xs mb-2 text-zinc-500/80 dark:text-zinc-400">{title}</p>
         <div className="flex items-baseline gap-2">
-          <p className="text-2xl font-semibold">{formatValue(value, format)}</p>
+          <p className="text-2xl font-semibold text-zinc-600 dark:text-zinc-100/90">{formatValue(value, format)}</p>
         {change !== null && (
             <span className={`text-xs font-medium ${isPositive ? 'text-green-500' : 'text-red-500'}`}>
               {isPositive ? "▲" : "▼"}{Math.abs(change).toFixed(1)}%
           </span>
         )}
         </div>
-        {caption && <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">{caption}</p>}
+        {caption && <p className="text-xs text-zinc-400/80 dark:text-zinc-500 mt-1">{caption}</p>}
       </div>
-      <div className="flex items-center">
-        <Icon className={`w-6 h-6 ${styles.iconColor}`} />
-      </div>
+     
     </Card>
   );
 } 

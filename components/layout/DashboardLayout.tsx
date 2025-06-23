@@ -41,10 +41,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="flex h-screen bg-background text-foreground">
+    <div className="flex h-screen text-foreground ">
       <Sidebar className="hidden lg:flex lg:w-60 shadow-lg" />
       
-      <div className="flex flex-col flex-1 overflow-y-auto bg-zinc-100 dark:bg-zinc-900">
+      {/* Main content area */}
+      <div className="flex flex-col flex-1 overflow-y-auto bg-gradient-to-t from-[#F5E1D8]/50 via-[#EFEAE8]/60 via-[#F1DEE5]/50 via-[#E6E3EB]/60 to-[#D1DFF0] dark:bg-[#1B1B1D]">
         <header className="flex h-[60px] shrink-0 items-center justify-between px-6 lg:hidden">
           <MobileSidebar />
           <div className="flex items-center gap-4">
