@@ -1,4 +1,4 @@
-# Funnel Analytics Dashboard
+# Syntra Analytics Dashboard
 
 This dashboard provides a comprehensive overview of a high-ticket coaching business's sales funnel, with a primary focus on tracking performance from YouTube video views to final sales. It's designed to help identify top-performing content, analyze conversion rates at each stage of the funnel, and make data-driven decisions to optimize marketing efforts.
 
