@@ -2,6 +2,7 @@ import NextAuth, { AuthOptions, Account } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import GoogleProvider from 'next-auth/providers/google';
 
+// TODO: Add a check to see if the Google API credentials are set
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   throw new Error('Missing Google API credentials in environment variables');
 }
