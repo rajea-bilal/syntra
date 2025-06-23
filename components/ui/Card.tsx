@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
  */
 export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`rounded-lg border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow shadow-black/5 p-4 ${className}`}>
+    <div className={`rounded-lg border border-zinc-200 dark:border-zinc-800 bg-card shadow-md shadow-black/5 dark:shadow-lg dark:shadow-black/30 p-4 ${className}`}>
       {children}
     </div>
   );

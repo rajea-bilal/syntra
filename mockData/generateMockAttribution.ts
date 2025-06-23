@@ -2,12 +2,11 @@ import { YouTubeVideo } from '@/types/youtube';
 
 export interface VideoAttribution {
   videoId: string;
+  leadsGenerated: number;
   callsBooked: number;
-  revenue: {
-    total: number;
-    paidInFull: number;
-    installments: number;
-  };
+  callsAccepted: number;
+  closedDeals: number;
+  revenue: number;
 }
 
 /**
@@ -36,11 +35,13 @@ export const generateMockAttribution = (videos: YouTubeVideo[]): VideoAttributio
       callBookingRate *= 2; // Case studies convert well
     }
 
-    const callsBooked = Math.floor(viewCount * callBookingRate);
+    const leadsGenerated = Math.floor(viewCount * 0.001); // Simplified lead gen rate
+    const callsBooked = Math.floor(leadsGenerated * 0.2); // 20% of leads book a call
+    const callsAccepted = Math.floor(callsBooked * 0.8); // 80% show up
 
-    // Assume a 20% close rate on calls, at a $5000 price point
-    const closeRate = 0.2;
-    const closedDeals = callsBooked * closeRate;
+    // Assume a 25% close rate on calls, at a $5000 price point
+    const closeRate = 0.25;
+    const closedDeals = Math.floor(callsAccepted * closeRate);
 
     // Assume 70% pay in full
     const pifDeals = Math.floor(closedDeals * 0.7);
@@ -52,12 +53,11 @@ export const generateMockAttribution = (videos: YouTubeVideo[]): VideoAttributio
 
     return {
       videoId: video.videoId,
+      leadsGenerated,
       callsBooked,
-      revenue: {
-        total: revenueFromPif + revenueFromInstallments,
-        paidInFull: revenueFromPif,
-        installments: revenueFromInstallments,
-      },
+      callsAccepted,
+      closedDeals,
+      revenue: revenueFromPif + revenueFromInstallments,
     };
   });
 }; 

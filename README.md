@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Syntra Dashboard: From Views to Revenue
+
+![Syntra Dashboard Landing Page](dashboard/public/dashboard-header.png)
+
+## Stop Guessing. Start Growing.
+
+You spend hours creating YouTube videos, pouring your expertise into content for your coaching business. But let's be honest, you're asking the big questions:
+
+*   "Are my videos *actually* making me money?"
+*   "Which content brings in high-ticket clients"
+*   "Where are people dropping off in my funnel?"
+
+Answering these feels like guesswork. You're stuck digging through separate analytics on YouTube, your calendar, and your payment processor, trying to connect the dots.
+
+**Syntra is the bridge between your content and your cash flow.** It's a dashboard that connects the dots for you, giving you a single, clear view of your entire high-ticket funnel.
+
+## Key Features ✨
+
+*   📊 **See Your Entire Funnel:** From YouTube views to website visitors, booked calls, and closed deals, you get a complete picture of your customer's journey. No more switching between ten different tabs.
+
+*   🎥 **Pinpoint Your Best Content:** Discover exactly which videos are your money-makers. Syntra attributes every sale back to the specific YouTube video that brought them in, so you can double down on what works.
+
+*   📈 **Track Real Growth:** Watch your business evolve with simple, beautiful charts. See month-over-month trends for revenue, calls, and conversion rates to make data-driven decisions, not gut-feel guesses.
+
+## How It Works (The Tech Stuff)
+
+This dashboard is built with a modern, fast, and interactive stack:
+
+*   **Framework:** [Next.js](https://nextjs.org/) (React)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **Data Fetching:** [Tanstack Query (React Query)](https://tanstack.com/query/latest)
+*   **Charts:** [Recharts](https://recharts.org/)
+*   **Authentication:** [NextAuth.js](https://next-auth.js.org/)
+*   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
 
 ## Getting Started
 
-First, run the development server:
+Want to run the project locally?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-repo/syntra-dashboard.git
+    cd syntra-dashboard
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+    
+3.  **Set up your environment variables:**
+    Create a `.env.local` file in the `dashboard` directory and add your API keys for Google (YouTube), Cal.com, etc.
+    ```env
+    GOOGLE_CLIENT_ID=
+    GOOGLE_CLIENT_SECRET=
+    # ... and other keys
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result. 

@@ -6,11 +6,44 @@ export interface MonthlyMetrics {
   uniqueWebsiteVisitors: number;
   totalCallsBooked: number;
   acceptedCalls: number;
+  closes: {
+    highTicket: number;
+    discount: number;
+  };
   newCashCollected: {
     paidInFull: number;
     installments: number;
+    byProduct: {
+      [key: string]: number;
+    };
+    total?: number;
   };
   totalCashCollected: number;
+  changes?: MonthlyMetricChanges;
+}
+
+export interface MonthlyMetricChanges {
+  youtubeTotalViews?: number | null;
+  youtubeUniqueViews?: number | null;
+  uniqueWebsiteVisitors?: number | null;
+  totalCallsBooked?: number | null;
+  acceptedCalls?: number | null;
+  closes?: {
+    highTicket?: number | null;
+    discount?: number | null;
+  };
+  newCashCollected?: {
+    total?: number | null;
+    paidInFull?: number | null;
+    installments?: number | null;
+    byProduct?: {
+      [key: string]: number | null;
+    };
+  };
+}
+
+export interface MonthlyMetricsWithChanges extends MonthlyMetrics {
+  changes: MonthlyMetricChanges;
 }
 
 // Video Attribution Model

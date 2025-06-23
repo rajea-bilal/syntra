@@ -1,7 +1,6 @@
 'use client';
 
 import { useSession, signIn } from 'next-auth/react';
-import { ReactNode } from 'react';
 import { Sidebar } from '../ui/sidebar';
 import { MobileSidebar } from '../ui/MobileSidebar';
 import { ThemeToggle } from '../ui/ThemeToggle';
@@ -11,39 +10,25 @@ import { Button } from '@/components/ui/button';
 // import { Sidebar } from '../ui/sidebar';
 // import { Header } from '../ui/header';
 
-interface DashboardLayoutProps {
-  children: ReactNode;
-}
-
 /**
  * Main dashboard layout with sidebar, header, and content area.
  * Uses Tailwind for layout and will use shadcn/ui for sidebar/header as you build them.
  */
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const isAuthenticated = status === 'authenticated';
 
+  if (status === 'loading') {
   return (
-    <div className="flex min-h-screen">
-      {/* Desktop Sidebar */}
-      <aside className="w-64 bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 hidden md:block">
-        <Sidebar />
-      </aside>
-      {/* Main content area */}
-      <div className="flex-1 flex flex-col">
-        {/* Header with mobile sidebar and theme toggle */}
-        <header className="flex h-16 items-center justify-between border-b bg-background px-4 md:px-6 sticky top-0 z-10 bg-white dark:bg-[#1a1a1a]">
-          <MobileSidebar />
-          <div className="flex items-center gap-4 ml-auto">
-            <ThemeToggle />
+      <div className="flex items-center justify-center h-screen bg-background text-foreground">
+        <p>Loading session...</p>
           </div>
-        </header>
-        {/* Main content */}
-        <main className="flex-1 p-4 md:p-6 lg:p-8">
-          {isAuthenticated ? (
-            children
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen gap-4 text-center bg-background text-foreground">
               <h1 className="text-2xl font-bold">Connect Your Account</h1>
               <p className="max-w-md">
                 To get started, please sign in with your Google account. This will allow us to fetch live data from your YouTube channel and display your analytics.
@@ -52,7 +37,38 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 Sign In with Google
               </Button>
             </div>
-          )}
+    );
+  }
+
+  return (
+    <div className="flex h-screen bg-background text-foreground">
+      <div className="hidden lg:block">
+        <Sidebar className="hidden lg:flex lg:w-60 shadow shadow-black/20" />
+      </div>
+      <div className="flex flex-col flex-1 overflow-y-auto bg-zinc-200/40 dark:bg-zinc-900/40">
+        <header className="flex h-[60px] shrink-0 items-center justify-between px-6 lg:hidden">
+          <MobileSidebar />
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+          </div>
+        </header>
+        <main className="flex-1 p-4 sm:p-6 md:p-8">
+          <div
+            className="relative mb-8 flex items-center justify-between shadow shadow-black/10 rounded-2xl bg-cover bg-center p-6 text-white sm:p-8"
+            style={{ backgroundImage: "url('/dashboard-header.png')" }}
+          >
+            <div className="absolute inset-0 rounded-2xl bg-black/10" />
+            <div className="relative z-10">
+              <p className="mb-1 text-sm font-medium text-zinc-300">Dashboard</p>
+              <h1 className="text-2xl font-bold sm:text-3xl">
+                Welcome back, {session?.user?.name ? session.user.name.split(' ')[0] : 'there'}
+              </h1>
+            </div>
+            <div className="relative z-10 hidden items-center gap-4 lg:flex">
+              <ThemeToggle />
+            </div>
+          </div>
+          {children}
         </main>
       </div>
     </div>

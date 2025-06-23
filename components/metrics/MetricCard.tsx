@@ -1,4 +1,4 @@
-import { ArrowUpRight, ArrowDownLeft, Minus } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import { Card } from "../ui/Card";
 import { formatValue, percentChange } from "../../lib/utils";
 
@@ -12,34 +12,74 @@ import { formatValue, percentChange } from "../../lib/utils";
 // When to use:
 // - Use this component anywhere you want to show a quick stat with a trend
 
+type MetricCardVariant = 'sky' | 'violet' | 'teal' | 'amber' | 'default';
+
 interface MetricCardProps {
   title: string;
   value: number | string | null;
   previousValue?: number | string | null;
   format?: "number" | "currency" | "percentage";
   caption?: string;
+  variant?: MetricCardVariant;
+  Icon: LucideIcon;
 }
 
-export function MetricCard({ title, value, previousValue, format = "number", caption }: MetricCardProps) {
+const variantStyles: Record<MetricCardVariant, {
+  bg: string;
+  border: string;
+  iconColor: string;
+}> = {
+  default: {
+    bg: 'bg-white dark:bg-zinc-900',
+    border: 'border-zinc-500',
+    iconColor: 'text-zinc-500',
+  },
+  sky: {
+    bg: 'bg-gradient-to-br from-sky-100 to-sky-50 dark:bg-none dark:bg-[#222224]',
+    border: 'border-sky-500',
+    iconColor: 'text-sky-500',
+  },
+  violet: {
+    bg: 'bg-gradient-to-br from-violet-100 to-violet-50 dark:bg-none dark:bg-[#222224]',
+    border: 'border-violet-500',
+    iconColor: 'text-violet-500',
+  },
+  teal: {
+    bg: 'bg-gradient-to-br from-teal-100 to-teal-50 dark:bg-none dark:bg-[#222224]',
+    border: 'border-teal-500',
+    iconColor: 'text-teal-500',
+  },
+  amber: {
+    bg: 'bg-gradient-to-br from-amber-100 to-amber-50 dark:bg-none dark:bg-[#222224]',
+    border: 'border-amber-500',
+    iconColor: 'text-amber-500',
+  },
+};
+
+export function MetricCard({ title, value, previousValue, format = "number", caption, variant = 'default', Icon }: MetricCardProps) {
   const change = percentChange(value, previousValue ?? null);
   const isPositive = change !== null && change >= 0;
-  const isNegative = change !== null && change < 0;
-  const ArrowIcon = isPositive ? ArrowUpRight : isNegative ? ArrowDownLeft : Minus;
-  const changeColor = isPositive ? "text-green-600" : isNegative ? "text-red-500" : "text-zinc-400";
+  
+  const styles = variantStyles[variant];
 
   return (
-    <Card className="relative min-h-[120px] flex flex-col justify-between p-4">
-      <ArrowIcon className={`absolute top-3 left-3 w-4 h-4 ${changeColor}`} />
-      <div className="flex items-baseline gap-2 mt-4">
-        <span className="text-3xl font-semibold tracking-tight">{formatValue(value, format)}</span>
+    <Card className={`${styles.bg} p-4 flex items-stretch`}>
+      <div className={`w-1 ${styles.border} dark:hidden rounded-full mr-4`}></div>
+      <div className="flex-1 flex flex-col justify-center">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">{title}</p>
+        <div className="flex items-baseline gap-2">
+          <p className="text-2xl font-semibold">{formatValue(value, format)}</p>
         {change !== null && (
-          <span className={`text-sm font-medium ml-2 ${changeColor}`}>
-            {isPositive ? "+" : ""}{change.toFixed(1)}%
+            <span className={`text-xs font-medium ${isPositive ? 'text-green-500' : 'text-red-500'}`}>
+              {isPositive ? "▲" : "▼"}{Math.abs(change).toFixed(1)}%
           </span>
         )}
+        </div>
+        {caption && <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">{caption}</p>}
       </div>
-      <div className="text-zinc-500 text-base mt-1">{title}</div>
-      {caption && <div className="text-zinc-400 text-xs mt-0.5">{caption}</div>}
+      <div className="flex items-center">
+        <Icon className={`w-6 h-6 ${styles.iconColor}`} />
+      </div>
     </Card>
   );
 } 

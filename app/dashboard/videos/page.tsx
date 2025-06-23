@@ -1,56 +1,69 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from 'react';
-import DashboardLayout from "@/components/layout/DashboardLayout";
-import { useQuery } from "@tanstack/react-query";
-import YouTubeApiService from "@/services/youtubeApi";
-import ConnectedChannelStatsHeader from '@/components/youtube/ChannelStatsHeader';
-import VideoPerformanceList from '@/components/youtube/VideoPerformanceList';
-import { YouTubeVideo } from '@/services/youtubeApi';
+import DashboardLayout from '@/components/layout/DashboardLayout';
+import { VideoAnalyticsTable } from '@/components/youtube/VideoAnalyticsTable';
+import { useQuery } from '@tanstack/react-query';
+import { YouTubeVideo, CombinedVideoData, VideoPerformance } from '@/types/youtube';
+import { generateMockVideoPerformance } from "@/mockData/generateMockVideoPerformance";
+import { generateMockAttribution } from "@/mockData/generateMockAttribution";
+import { useMemo } from 'react';
+
+const combineWithMockPerformance = (videos: YouTubeVideo[]): CombinedVideoData[] => {
+  const attributionData = generateMockAttribution(videos);
+  const attributionMap = new Map(attributionData.map(attr => [attr.videoId, attr]));
+
+  return videos.map(video => {
+    const mockPerformance: VideoPerformance = generateMockVideoPerformance(video.videoId);
+    const attribution = attributionMap.get(video.videoId);
+    const viewCount = parseInt(video.stats?.viewCount || '0', 10);
+    const revenue = attribution?.revenue || 0;
+    const closedDeals = attribution?.closedDeals || 0;
+
+    return {
+      ...video,
+      performance: mockPerformance,
+      leadsGenerated: attribution?.leadsGenerated,
+      callsBooked: attribution?.callsBooked,
+      callsAccepted: attribution?.callsAccepted,
+      closedDeals: closedDeals,
+      revenue: revenue,
+      revenuePerView: viewCount > 0 ? revenue / viewCount : 0,
+      viewToCloseRate: viewCount > 0 ? (closedDeals / viewCount) * 100 : 0,
+    };
+  });
+};
+
 
 export default function VideosPage() {
-  const [videos, setVideos] = useState<YouTubeVideo[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch('/api/youtube/videos');
-        if (!response.ok) {
-          throw new Error('Failed to fetch videos');
-        }
-        const data = await response.json();
-        setVideos(data.videos);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
+  const { data: videoAnalytics, isLoading, error } = useQuery<YouTubeVideo[]>({
+    queryKey: ['youtubeAnalytics'],
+    queryFn: async () => {
+      const res = await fetch('/api/youtube/analytics');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => null);
+        throw new Error(errorData?.error || 'Failed to fetch analytics data');
       }
-    };
+      return res.json();
+    },
+  });
 
-    fetchVideos();
-  }, []);
+  const combinedData = useMemo(() => {
+    if (!videoAnalytics) return [];
+    return combineWithMockPerformance(videoAnalytics);
+  }, [videoAnalytics]);
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col gap-8">
-        <h1 className="text-2xl font-bold">Video Performance</h1>
-        
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Channel Overview</h2>
-          <ConnectedChannelStatsHeader />
-        </section>
-
-        <section className="mt-8">
-          <h2 className="text-2xl font-semibold mb-4">Video Performance</h2>
-          {error ? (
-            <p className="text-red-500">Error: {error}</p>
-          ) : (
-            <VideoPerformanceList videos={videos} isLoading={isLoading} />
-          )}
-        </section>
+      <div className="container mx-auto p-4 md:p-6 lg:p-8">
+        <h1 className="text-3xl font-bold mb-6">Video Performance</h1>
+        {error ? (
+          <div className="text-red-500 text-center p-8 border rounded-lg">
+            <p>Error loading data:</p>
+            <p className="font-mono bg-red-100 dark:bg-red-900/50 p-2 rounded mt-2">{error.message}</p>
+          </div>
+        ) : (
+          <VideoAnalyticsTable data={combinedData || []} isLoading={isLoading} />
+        )}
       </div>
     </DashboardLayout>
   );

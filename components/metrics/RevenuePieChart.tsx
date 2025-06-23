@@ -1,84 +1,94 @@
 'use client';
 
-import { ResponsivePie } from '@nivo/pie';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useTheme } from 'next-themes';
 import { MonthlyMetrics } from '@/types/metrics';
+import { useState, useEffect } from 'react';
+import { Card } from '../ui/Card';
 
 interface RevenuePieChartProps {
   data: MonthlyMetrics[];
 }
 
+const LIGHT_COLORS = ['#A8D8B9', '#C3A9D1', '#F5CBA7', '#A9CCE3', '#F7DC6F', '#F5B7B1'];
+const DARK_COLORS = ['#6A8E79', '#927E9F', '#B5927F', '#7C93A6', '#B7A45A', '#B58B87'];
+
 export function RevenuePieChart({ data }: RevenuePieChartProps) {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  // Aggregate the revenue data for the entire period
-  const totalPaidInFull = data.reduce((acc, month) => acc + month.newCashCollected.paidInFull, 0);
-  const totalInstallments = data.reduce((acc, month) => acc + month.newCashCollected.installments, 0);
+  useEffect(() => setMounted(true), []);
 
-  const pieData = [
-    {
-      id: 'Paid in Full',
-      label: 'Paid in Full',
-      value: totalPaidInFull,
-    },
-    {
-      id: 'Installments',
-      label: 'Installments',
-      value: totalInstallments,
-    },
-  ];
+  const currentColors = theme === 'dark' ? DARK_COLORS : LIGHT_COLORS;
+
+  const productRevenue = data.reduce((acc, month) => {
+    const products = month.newCashCollected.byProduct || {};
+    for (const productName in products) {
+      if (Object.prototype.hasOwnProperty.call(products, productName)) {
+        acc[productName] = (acc[productName] || 0) + products[productName];
+      }
+    }
+    return acc;
+  }, {} as { [key: string]: number });
+
+  const pieData = Object.keys(productRevenue).map((productName, index) => ({
+    name: productName,
+    value: productRevenue[productName],
+    fill: currentColors[index % currentColors.length],
+  }));
+
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm shadow-lg">
+          <p style={{ color: payload[0].payload.fill }}>
+            {`${payload[0].name}: ${payload[0].value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const legendTextColor = theme === 'dark' ? '#fff' : '#333';
+
+  if (!mounted) {
+    return (
+      <Card>
+        <div className="h-72 flex items-center justify-center">
+          <p className="text-zinc-500">Loading chart...</p>
+        </div>
+      </Card>
+    );
+  }
 
   return (
     <div className="h-72">
-      <ResponsivePie
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Tooltip content={<CustomTooltip />} />
+          <Legend
+            iconType="circle"
+            layout="vertical"
+            verticalAlign="middle"
+            align="right"
+            wrapperStyle={{ color: legendTextColor, fontSize: '12px' }}
+          />
+          <Pie
         data={pieData}
-        margin={{ top: 20, right: 80, bottom: 20, left: 80 }}
-        innerRadius={0.5}
-        padAngle={0.7}
-        cornerRadius={3}
-        activeOuterRadiusOffset={8}
-        borderWidth={1}
-        borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
-        arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor={theme === 'dark' ? '#fff' : '#333'}
-        arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: 'color' }}
-        arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
-        theme={{
-          tooltip: {
-            container: {
-              background: theme === 'dark' ? '#333' : '#fff',
-              color: theme === 'dark' ? '#fff' : '#333',
-            },
-          },
-        }}
-        legends={[
-            {
-                anchor: 'bottom',
-                direction: 'row',
-                justify: false,
-                translateX: 0,
-                translateY: 15,
-                itemsSpacing: 0,
-                itemWidth: 100,
-                itemHeight: 18,
-                itemTextColor: '#999',
-                itemDirection: 'left-to-right',
-                itemOpacity: 1,
-                symbolSize: 18,
-                symbolShape: 'circle',
-                effects: [
-                    {
-                        on: 'hover',
-                        style: {
-                            itemTextColor: theme === 'dark' ? '#fff' : '#000'
-                        }
-                    }
-                ]
-            }
-        ]}
-      />
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            outerRadius={80}
+            dataKey="value"
+            nameKey="name"
+          >
+            {pieData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.fill} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
     </div>
   );
 } 

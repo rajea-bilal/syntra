@@ -64,10 +64,11 @@ export type VideoAnalyticsData = YouTubeVideo & { stats?: YouTubeVideoStatistics
 export interface CombinedVideoData extends YouTubeVideo {
   stats?: YouTubeVideoStatistics;
   performance?: VideoPerformance;
+  leadsGenerated?: number;
   callsBooked?: number;
-  revenue?: {
-    total: number;
-    paidInFull: number;
-    installments: number;
-  };
+  callsAccepted?: number;
+  closedDeals?: number;
+  revenue?: number;
+  revenuePerView?: number;
+  viewToCloseRate?: number;
 } 
