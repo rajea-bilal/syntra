@@ -230,7 +230,7 @@ export function VideoAnalyticsTable({ data = [], isLoading }: VideoAnalyticsTabl
   }
 
   return (
-    <Card className="p-4 md:p-6 shadow-lg">
+    <Card className="bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4">
       <div className="overflow-x-auto">
         <div className="rounded-md border">
           <Table>

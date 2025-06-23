@@ -13,7 +13,7 @@ interface TopVideoCardProps {
 export const TopVideoCard = ({ video, metricLabel, metricValue }: TopVideoCardProps) => {
   if (!video) {
     return (
-      <Card className="p-4 md:p-6">
+      <Card className="p-4 md:p-6 bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl">
         <div className="h-full flex items-center justify-center text-zinc-500">
           <p>No top performing video found.</p>
         </div>
@@ -22,7 +22,7 @@ export const TopVideoCard = ({ video, metricLabel, metricValue }: TopVideoCardPr
   }
 
   return (
-    <Card className="p-4 md:p-6">
+    <Card className="p-4 md:p-6 bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl">
       <h3 className="text-lg font-semibold mb-4 dark:text-zinc-400">Top Performing Video</h3>
       <div className="flex flex-col sm:flex-row items-center gap-4">
         <Image

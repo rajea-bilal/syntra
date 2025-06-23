@@ -264,48 +264,44 @@ export default function Dashboard() {
               />
             </div>
 
-            <div className="mt-6 sm:mt-8">
-              <div className="w-full">
-                <FunnelChart totalViews={totalYoutubeViews} />
-              </div>
+            <div className="mt-6 sm:mt-8 space-y-6">
+                <div>
+                    <FunnelChart totalViews={totalYoutubeViews} />
+                </div>
+                <div>
+                    <TopVideoCard 
+                        video={topPerformer}
+                        metricLabel="Total Revenue"
+                        metricValue={formatValue(topPerformer?.revenue || 0, 'currency')}
+                    />
+                </div>
             </div>
-
-               <div className="mt-6 sm:mt-8">
-      <TopVideoCard 
-        video={topPerformer}
-        metricLabel="Total Revenue"
-        metricValue={formatValue(topPerformer?.revenue || 0, 'currency')}
-      />
-    </div>
           </TabsContent>
 
           <TabsContent value="video">
-            <VideoAnalyticsTable data={combinedData} isLoading={isYoutubeLoading} />
+             <VideoAnalyticsTable data={combinedData} isLoading={isYoutubeLoading} />
           </TabsContent>
 
           <TabsContent value="monthly">
-            <div className="space-y-8">
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                <MonthlyLineChart
-                  title="Revenue Over Time ($)"
-                  data={metrics || []}
-                  metricKey="totalCashCollected"
-                />
-                <MonthlyLineChart
-                  title="Calls Booked Over Time"
-                  data={metrics || []}
-                  metricKey="totalCallsBooked"
-                />
-              </div>
+            <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
+              <MonthlyLineChart
+                title="Revenue Over Time ($)"
+                data={metrics || []}
+                metricKey="totalCashCollected"
+              />
+              <MonthlyLineChart
+                title="Calls Booked Over Time"
+                data={metrics || []}
+                metricKey="totalCallsBooked"
+              />
+            </div>
+            <div className="mt-4 grid grid-cols-1 gap-4 lg:mt-6 lg:gap-6">
+              <Card className="bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4">
+                 <h3 className="text-lg font-semibold mb-2">Funnel Conversion Rate (%)</h3>
+                 <FunnelChart totalViews={totalYoutubeViews} />
 
-              <Card>
-                <h2 className="p-4 text-lg font-semibold">Funnel Conversion Rate (%)</h2>
-                <MonthlyBarChart data={metrics} />
-              </Card>
-
-              <Card>
-                <h2 className="p-4 text-lg font-semibold">Monthly Metrics Breakdown</h2>
-                <MonthlyMetricsTable data={metricsWithChanges} />
+                 <h3 className="text-lg font-semibold mb-2 mt-4">Monthly Metrics</h3>
+                 <MonthlyBarChart data={metrics || []} />
               </Card>
             </div>
           </TabsContent>

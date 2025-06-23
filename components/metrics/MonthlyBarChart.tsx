@@ -65,7 +65,7 @@ export function MonthlyBarChart({ data }: MonthlyBarChartProps) {
 
   if (!mounted) {
     return (
-      <Card className="p-6">
+      <Card className="p-6 bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl">
         <h3 className="text-lg font-semibold mb-4">Monthly Metrics</h3>
         <div style={{ height: 320 }} className="flex items-center justify-center">
           <p className="text-zinc-500">Loading chart...</p>
@@ -75,7 +75,7 @@ export function MonthlyBarChart({ data }: MonthlyBarChartProps) {
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-6 bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl">
       <h3 className="text-lg font-semibold mb-4">Monthly Metrics</h3>
       <div style={{ height: 320 }}>
         <ResponsiveContainer width="100%" height="100%">

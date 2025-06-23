@@ -166,11 +166,11 @@
 .dashboard-gradient-bg {
   background-image: linear-gradient(
     to top,
-    #F5E1D8 0%,
-    #EFEAE8 40%,
-    #F1DEE5 60%,
-    #E6E3EB 80%,
-    #D1DFF0 100%
+    #F5E1D8 10%,
+    #EFEAE8 20%,
+    /* #F1DEE5 40%, */
+    #E6E3EB 60%,
+    #D1DFF0 80%
   );
   background-color: #fff;
 }

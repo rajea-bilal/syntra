@@ -80,7 +80,7 @@ export function MonthlyLineChart({ data, metricKey, title }: MonthlyLineChartPro
 
   if (!mounted) {
     return (
-      <Card className="p-4">
+      <Card className="p-4 bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl">
         <h3 className="text-lg font-semibold mb-4">{title}</h3>
         <div style={{ height: 300 }} className="flex items-center justify-center">
           <p className="text-zinc-500">Loading chart...</p>
@@ -90,7 +90,7 @@ export function MonthlyLineChart({ data, metricKey, title }: MonthlyLineChartPro
   }
 
   return (
-    <Card className="p-4">
+    <Card className="p-4 bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
       <div style={{ height: 300 }}>
         <ResponsiveContainer width="100%" height="100%">

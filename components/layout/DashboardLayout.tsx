@@ -54,13 +54,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </header>
         <main className="flex-1 p-4 sm:p-6 md:p-8">
           <div
-            className="relative mb-8 flex items-center justify-between shadow shadow-black/10 rounded-2xl bg-cover bg-center p-6 text-white sm:p-8"
-            style={{ backgroundImage: "url('/dashboard-header.png')" }}
+            className="relative mb-8 flex items-center justify-between backdrop-blur-lg  shadow-sm shadow-black/15 rounded-2xl bg-cover bg-center p-6 text-white sm:p-8 "
+            // style={{ backgroundImage: "url('/dashboard-header.png')" }}
           >
-            <div className="absolute inset-0 rounded-2xl bg-black/10" />
+            <div className="absolute inset-0 rounded-2xl" />
             <div className="relative z-10">
-              <p className="mb-1 text-sm font-medium text-zinc-300">Dashboard</p>
-              <h1 className="text-2xl font-bold sm:text-3xl">
+              <p className="mb-1 text-sm font-normal text-white dark:text-zinc-400">Dashboard</p>
+              <h1 className="text-2xl font-normal sm:text-3xl tracking-tight text-white dark:text-zinc-100">
                 Welcome back, {session?.user?.name ? session.user.name.split(' ')[0] : 'there'}
               </h1>
             </div>
