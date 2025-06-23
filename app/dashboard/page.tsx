@@ -71,7 +71,10 @@ export default function Dashboard() {
     queryKey: ['youtubeAnalytics'],
     queryFn: async () => {
       const response = await fetch('/api/youtube/analytics');
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Failed to parse error response' }));
+        throw new Error(errorData.error || 'Network response was not ok');
+      }
       return response.json();
     },
   });

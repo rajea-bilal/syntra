@@ -42,10 +42,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex h-screen bg-background text-foreground">
-      <div className="hidden lg:block">
-        <Sidebar className="hidden lg:flex lg:w-60 shadow shadow-black/20" />
-      </div>
-      <div className="flex flex-col flex-1 overflow-y-auto bg-zinc-200/40 dark:bg-zinc-900/40">
+      <Sidebar className="hidden lg:flex lg:w-60 shadow-lg" />
+      
+      <div className="flex flex-col flex-1 overflow-y-auto bg-zinc-100 dark:bg-zinc-900">
         <header className="flex h-[60px] shrink-0 items-center justify-between px-6 lg:hidden">
           <MobileSidebar />
           <div className="flex items-center gap-4">

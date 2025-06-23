@@ -51,7 +51,7 @@ const YOUTUBE_API_COSTS = {
   VIDEO_LIST: 1,
 };
 
-class YouTubeApiService {
+export class YouTubeApiService {
   private static instance: YouTubeApiService;
   private oauth2Client: OAuth2Client;
   private axiosInstance: AxiosInstance;
@@ -198,6 +198,24 @@ class YouTubeApiService {
   }
   
   /**
+   * Get channel videos with their statistics
+   */
+  public async getVideosWithStats(channelId: string): Promise<YouTubeVideo[]> {
+    const { videos } = await this.getChannelVideos(channelId);
+    if (videos.length === 0) {
+      return [];
+    }
+
+    const videoIds = videos.map(v => v.videoId);
+    const stats = await this.getVideoStatistics(videoIds);
+
+    return videos.map(video => ({
+      ...video,
+      stats: stats[video.videoId],
+    }));
+  }
+
+  /**
    * Get channel playlists
    */
   public async getChannelPlaylists(
@@ -288,6 +306,4 @@ class YouTubeApiService {
     this.resetQuotaIfNewDay();
     return this.quotaUsage + cost <= 10000;
   }
-}
-
-export default YouTubeApiService; 
+} 
