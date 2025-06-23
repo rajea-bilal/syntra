@@ -2,7 +2,7 @@
 
 import { Card } from '@/components/ui/Card';
 import { useTheme } from 'next-themes';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList, TooltipProps } from 'recharts';
 import { useState, useEffect } from 'react';
 
 interface FunnelChartProps {
@@ -41,14 +41,16 @@ export const FunnelChart = ({ totalViews }: FunnelChartProps) => {
     { name: 'Closed', value: Math.max(1, Math.round(closed)) },
   ].reverse(); // Reverse for top-to-bottom display
 
-  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
+  const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
-      const data = payload[0].payload;
-    return (
-        <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm">
-          <p className="font-bold">{`${data.name}: ${data.value.toLocaleString()}`}</p>
-        </div>
-          );
+      const data = payload[0]?.payload;
+      if (data) {
+        return (
+          <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm">
+            <p className="font-bold">{`${data.name}: ${data.value.toLocaleString()}`}</p>
+          </div>
+        );
+      }
     }
     return null;
   };

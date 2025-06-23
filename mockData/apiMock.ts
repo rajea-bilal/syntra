@@ -10,9 +10,9 @@
 import { generateMockMonthlyMetrics } from './generateMockMonthlyMetrics';
 import { generateMockVideoPerformance } from './generateMockVideoPerformance';
 import { generateMockFunnelData } from './generateMockFunnelData';
-import { MonthlyMetrics, VideoPerformance, FunnelStage } from '../types/metrics';
+import { MonthlyMetrics, FunnelStage } from '../types/metrics';
 import { generateMockVideoAnalytics } from './generateMockVideoAnalytics';
-import { VideoAnalyticsData } from '@/types/youtube';
+import { VideoAnalyticsData, VideoPerformance } from '@/types/youtube';
 
 /**
  * Simulates API endpoints for dashboard development.
@@ -33,7 +33,8 @@ export const apiMock = {
    */
   async getVideoPerformance(): Promise<VideoPerformance[]> {
     await simulateLatency();
-    return generateMockVideoPerformance();
+    const mockVideos = generateMockVideoAnalytics();
+    return mockVideos.map(video => generateMockVideoPerformance(video));
   },
 
   /**
@@ -67,4 +68,4 @@ export const apiMock = {
 async function simulateLatency() {
   const delay = Math.random() * 300 + 100;
   return new Promise((resolve) => setTimeout(resolve, delay));
-} 
+}

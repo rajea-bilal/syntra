@@ -16,6 +16,10 @@ export interface YouTubeVideo {
 }
 
 export interface YouTubeChannelStatistics {
+  channelId: string;
+  title: string;
+  description: string;
+  thumbnailUrl: string;
   viewCount: string;
   subscriberCount: string;
   videoCount: string;
@@ -46,8 +50,15 @@ export interface YouTubeVideoStatistics {
 }
 
 export interface VideoPerformance {
-  revenue: number;
+  videoId: string;
+  title: string;
+  views: number;
   leadsGenerated: number;
+  callsBooked: number;
+  callsAccepted: number;
+  revenue: number;
+  conversionRate: number;
+  revenuePerView: number;
 }
 
 /**

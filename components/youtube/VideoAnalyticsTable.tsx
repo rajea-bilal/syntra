@@ -27,6 +27,7 @@ import { CombinedVideoData } from '@/types/youtube';
 import { formatValue } from '@/lib/utils';
 import { Card } from '@/components/ui/Card';
 import { VideoConversionFunnel } from './VideoConversionFunnel';
+import Image from 'next/image';
 
 export const columns: ColumnDef<CombinedVideoData>[] = [
   {
@@ -56,7 +57,13 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
       const video = row.original;
       return (
         <div className="flex items-center gap-4">
-          <img className="h-10 w-12 rounded-md object-cover" src={video.thumbnailUrl} alt="" />
+          <Image
+            width={48}
+            height={40}
+            className="h-10 w-12 rounded-md object-cover"
+            src={video.thumbnailUrl}
+            alt={video.title}
+          />
           <span className="font-medium dark:text-zinc-400">{video.title}</span>
         </div>
       );

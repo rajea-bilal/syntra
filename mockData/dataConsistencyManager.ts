@@ -1,4 +1,5 @@
-import { MonthlyMetrics, VideoPerformance, FunnelStage } from '../types/metrics';
+import { MonthlyMetrics, FunnelStage } from '../types/metrics';
+import { VideoPerformance } from '../types/youtube';
 
 /**
  * Ensures consistency and realistic relationships between different mock data types.

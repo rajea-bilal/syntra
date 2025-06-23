@@ -7,6 +7,9 @@ declare module 'next-auth' {
     refreshToken?: string;
     scope?: string;
     expiresAt?: number;
+    user: {
+      id?: string;
+    } & DefaultSession['user'];
   }
 }
 

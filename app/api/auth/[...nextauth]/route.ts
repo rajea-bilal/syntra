@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions, Account } from 'next-auth';
+import NextAuth, { AuthOptions, Account, Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -7,7 +7,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   throw new Error('Missing Google API credentials in environment variables');
 }
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -36,12 +36,12 @@ export const authOptions: AuthOptions = {
       }
       return token;
     },
-    async session({ session, token }: { session: any; token: JWT }): Promise<any> {
-      session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
-      session.scope = token.scope;
-      session.expiresAt = token.expiresAt;
-      session.user.id = token.sub;
+    async session({ session, token }: { session: Session; token: JWT }): Promise<Session> {
+      session.accessToken = token.accessToken as string;
+      session.refreshToken = token.refreshToken as string;
+      session.scope = token.scope as string;
+      session.expiresAt = token.expiresAt as number;
+      session.user.id = token.sub as string;
       return session;
     },
   },

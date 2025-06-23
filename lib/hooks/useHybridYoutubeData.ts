@@ -6,7 +6,7 @@ import { generateMockVideoPerformance } from '@/mockData/generateMockVideoPerfor
 // This function combines the real video data with mock performance data.
 const combineWithMockPerformance = (videos: YouTubeVideo[]): CombinedVideoData[] => {
   return videos.map(video => {
-    const mockPerformance: VideoPerformance = generateMockVideoPerformance(video.videoId);
+    const mockPerformance: VideoPerformance = generateMockVideoPerformance(video);
     return {
       ...video,
       performance: mockPerformance,

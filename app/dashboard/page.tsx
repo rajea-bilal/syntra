@@ -42,7 +42,7 @@ const combineWithMockPerformance = (videos: YouTubeVideo[]): CombinedVideoData[]
   const attributionMap = new Map(attributionData.map(attr => [attr.videoId, attr]));
 
   return videos.map(video => {
-    const mockPerformance: VideoPerformance = generateMockVideoPerformance(video.videoId);
+    const mockPerformance: VideoPerformance = generateMockVideoPerformance(video);
     const attribution = attributionMap.get(video.videoId);
     const viewCount = parseInt(video.stats?.viewCount || '0', 10);
     const revenue = attribution?.revenue || 0;
@@ -95,7 +95,16 @@ export default function Dashboard() {
       const calData = await calRes.json();
       const kajabiData = await kajabiRes.json();
 
-         const combinedMetrics = calData.map((calMonth: any, index: number) => {
+      type CalMonth = {
+        month: string;
+        youtube_views: number;
+        youtube_unique_views: number;
+        unique_visitors: number;
+        calls_booked: number;
+        calls_accepted: number;
+      };
+
+      const combinedMetrics = calData.map((calMonth: CalMonth, index: number) => {
         const kajabiMonth = kajabiData[index];
         return {
           month: calMonth.month,
@@ -117,7 +126,7 @@ export default function Dashboard() {
         };
       });
 
-            return combinedMetrics;
+      return combinedMetrics;
     },
   });
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, TooltipProps } from 'recharts';
 import { useTheme } from 'next-themes';
 import { MonthlyMetrics } from '@/types/metrics';
 import { useState, useEffect } from 'react';
@@ -37,15 +37,18 @@ export function RevenuePieChart({ data }: RevenuePieChartProps) {
     fill: currentColors[index % currentColors.length],
   }));
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
-      return (
-        <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm shadow-lg">
-          <p style={{ color: payload[0].payload.fill }}>
-            {`${payload[0].name}: ${payload[0].value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}
-          </p>
-        </div>
-      );
+      const data = payload[0];
+      if (data && data.payload && data.name && data.value) {
+        return (
+          <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm shadow-lg">
+            <p style={{ color: (data.payload as any).fill }}>
+              {`${data.name}: ${data.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}
+            </p>
+          </div>
+        );
+      }
     }
     return null;
   };

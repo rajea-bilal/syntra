@@ -52,7 +52,7 @@ export const MonthlyMetricsTable = ({ data }: MonthlyMetricsTableProps) => {
         : b.month.localeCompare(a.month);
     }
     
-    const getNestedValue = (obj: any, path: string) => path.split('.').reduce((o, k) => (o || {})[k], obj);
+    const getNestedValue = (obj: MonthlyMetrics, path: string) => path.split('.').reduce((o: any, k: string) => (o || {})[k], obj);
 
     const valA = getNestedValue(a, sortKey);
     const valB = getNestedValue(b, sortKey);

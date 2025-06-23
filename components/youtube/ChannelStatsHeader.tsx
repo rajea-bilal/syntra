@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Eye, Users, Video } from "lucide-react";
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import YouTubeApiService, { YouTubeChannelStatistics } from '@/services/youtubeApi';
+import { YouTubeChannelStatistics } from '@/types/youtube';
 
 interface StatCardProps {
   icon: React.ReactElement;
@@ -49,29 +49,20 @@ const ChannelStatsHeader: React.FC<ChannelStatsHeaderProps> = ({ stats, isLoadin
       <StatCard 
         icon={<Eye className="text-blue-500" />} 
         label="Total Views" 
-        value={parseInt(stats.viewCount, 10).toLocaleString()} 
+        value={stats.viewCount ? parseInt(stats.viewCount, 10).toLocaleString() : 'N/A'} 
       />
       <StatCard 
         icon={<Users className="text-green-500" />} 
         label="Subscribers" 
-        value={parseInt(stats.subscriberCount, 10).toLocaleString()} 
+        value={stats.subscriberCount ? parseInt(stats.subscriberCount, 10).toLocaleString() : 'N/A'}
       />
       <StatCard 
         icon={<Video className="text-red-500" />} 
         label="Total Videos" 
-        value={parseInt(stats.videoCount, 10).toLocaleString()} 
+        value={stats.videoCount ? parseInt(stats.videoCount, 10).toLocaleString() : 'N/A'} 
       />
     </div>
   );
 };
 
-export default function ConnectedChannelStatsHeader() {
-  const channelId = "UC_x5XG1OV2P6uZZ5FSM9Ttw"; // Replace with your actual channel ID
-  const { data: channelStats, isLoading: isLoadingStats } = useQuery({
-    queryKey: ['youtubeChannelStats', channelId],
-    queryFn: () => YouTubeApiService.getInstance().getChannelStatistics(channelId),
-    enabled: !!channelId,
-  });
-
-  return <ChannelStatsHeader stats={channelStats || null} isLoading={isLoadingStats} />;
-} 
+export default ChannelStatsHeader; 

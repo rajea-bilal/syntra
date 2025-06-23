@@ -1,33 +1,11 @@
-import { YouTubeVideo, YouTubeVideoStatistics } from "@/services/youtubeApi";
+import { YouTubeVideo } from "@/types/youtube";
 import { Card } from "@/components/ui/Card";
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
-import YouTubeApiService from '@/services/youtubeApi';
 
 interface VideoPerformanceListProps {
   videos: YouTubeVideo[];
   isLoading: boolean;
 }
-
-const VideoStats = ({ videoId }: { videoId: string }) => {
-  const { data: stats, isLoading, error } = useQuery<YouTubeVideoStatistics>({
-    queryKey: ['videoStats', videoId],
-    queryFn: () => YouTubeApiService.getInstance().getVideoStatistics([videoId]).then(statsMap => statsMap[videoId]),
-    enabled: !!videoId,
-  });
-
-  if (isLoading) return <span className="text-sm text-gray-400">Loading stats...</span>;
-  if (error) return <span className="text-sm text-red-500">Error loading stats</span>;
-  if (!stats) return null;
-
-  return (
-    <div className="flex gap-4 mt-2 text-sm">
-      <span>Views: {stats.viewCount}</span>
-      <span>Likes: {stats.likeCount}</span>
-      <span>Comments: {stats.commentCount}</span>
-    </div>
-  );
-};
 
 const VideoRow = ({ video }: { video: YouTubeVideo }) => (
   <Card className="flex items-center p-4 gap-4 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
@@ -41,7 +19,11 @@ const VideoRow = ({ video }: { video: YouTubeVideo }) => (
     <div className="flex-1">
       <h3 className="font-semibold">{video.title}</h3>
       <p className="text-sm text-gray-500">Published: {new Date(video.publishedAt).toLocaleDateString()}</p>
-      <VideoStats videoId={video.videoId} />
+      <div className="flex gap-4 mt-2 text-sm">
+        <span>Views: {video.stats?.viewCount ?? 'N/A'}</span>
+        <span>Likes: {video.stats?.likeCount ?? 'N/A'}</span>
+        <span>Comments: {video.stats?.commentCount ?? 'N/A'}</span>
+      </div>
     </div>
   </Card>
 );

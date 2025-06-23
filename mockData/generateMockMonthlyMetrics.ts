@@ -1,14 +1,3 @@
-// generateMockMonthlyMetrics
-//
-// What this file does:
-// - Makes fake data for each month (views, visitors, calls, money, etc.)
-// - Used for testing and building the dashboard before real data is ready
-//
-// What kind of data:
-// - Makes up numbers for each metric for 12 months
-//
-// Use this to fill your dashboard with sample data while you work.
-
 import { MonthlyMetrics } from '../types/metrics';
 
 export function generateMockMonthlyMetrics(months = 12): MonthlyMetrics[] {
@@ -23,6 +12,8 @@ export function generateMockMonthlyMetrics(months = 12): MonthlyMetrics[] {
     const acceptedCalls = Math.floor(callsBooked * (0.3 + Math.random() * 0.4));
     const paidInFull = Math.floor(acceptedCalls * (0.2 + Math.random() * 0.3) * 2000);
     const installments = Math.floor(acceptedCalls * (0.3 + Math.random() * 0.3) * 500);
+    const highTicketCloses = Math.floor(acceptedCalls * (0.4 + Math.random() * 0.2));
+    const discountCloses = Math.floor(acceptedCalls * (0.1 + Math.random() * 0.1));
     
     return {
       month: date.toISOString().substring(0, 7),
@@ -31,11 +22,19 @@ export function generateMockMonthlyMetrics(months = 12): MonthlyMetrics[] {
       uniqueWebsiteVisitors: visitors,
       totalCallsBooked: callsBooked,
       acceptedCalls,
+      closes: {
+        highTicket: highTicketCloses,
+        discount: discountCloses,
+      },
       newCashCollected: {
         paidInFull,
-        installments
+        installments,
+        byProduct: {
+          'Main Course': paidInFull * 0.7,
+          'Mini Course': paidInFull * 0.3,
+        },
       },
       totalCashCollected: paidInFull + installments
     };
   });
-} 
+}

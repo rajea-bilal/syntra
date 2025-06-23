@@ -46,19 +46,6 @@ export interface MonthlyMetricsWithChanges extends MonthlyMetrics {
   changes: MonthlyMetricChanges;
 }
 
-// Video Attribution Model
-export interface VideoPerformance {
-  videoId: string;
-  title: string;
-  views: number;
-  leadsGenerated: number;
-  callsBooked: number;
-  callsAccepted: number;
-  revenue: number;
-  conversionRate: number;
-  revenuePerView: number;
-}
-
 // Funnel Stage Model
 export interface FunnelStage {
   stage: string;

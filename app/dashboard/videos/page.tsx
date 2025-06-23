@@ -13,7 +13,7 @@ const combineWithMockPerformance = (videos: YouTubeVideo[]): CombinedVideoData[]
   const attributionMap = new Map(attributionData.map(attr => [attr.videoId, attr]));
 
   return videos.map(video => {
-    const mockPerformance: VideoPerformance = generateMockVideoPerformance(video.videoId);
+    const mockPerformance: VideoPerformance = generateMockVideoPerformance(video);
     const attribution = attributionMap.get(video.videoId);
     const viewCount = parseInt(video.stats?.viewCount || '0', 10);
     const revenue = attribution?.revenue || 0;

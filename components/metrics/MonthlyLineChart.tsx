@@ -1,6 +1,6 @@
 'use client';
 
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, TooltipProps } from 'recharts';
 import { useTheme } from 'next-themes';
 import { Card } from '../ui/Card';
 import { MonthlyMetrics } from '../../types/metrics';
@@ -38,8 +38,8 @@ const METRIC_COLORS: { light: ColorMap, dark: ColorMap } = {
 };
 
 // Helper function to safely access nested properties
-function getNestedValue(obj: any, path: string): number {
-  return path.split('.').reduce((acc, part) => acc && acc[part], obj) || 0;
+function getNestedValue(obj: MonthlyMetrics, path: string): number {
+  return path.split('.').reduce((acc: any, part: string) => acc && acc[part], obj) || 0;
 }
 
 export function MonthlyLineChart({ data, metricKey, title }: MonthlyLineChartProps) {
@@ -63,14 +63,17 @@ export function MonthlyLineChart({ data, metricKey, title }: MonthlyLineChartPro
   const currentColors = theme === 'dark' ? METRIC_COLORS.dark : METRIC_COLORS.light;
   const lineColor = currentColors[metricKey] || currentColors['default'];
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
-      return (
-        <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm shadow-lg">
-          <p className="font-bold">{`${label}`}</p>
-          <p style={{ color: lineColor }}>{`${title}: ${payload[0].value.toLocaleString()}`}</p>
-        </div>
-      );
+      const data = payload[0];
+      if (data && typeof data.value === 'number') {
+        return (
+          <div className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm shadow-lg">
+            <p className="font-bold">{`${label}`}</p>
+            <p style={{ color: lineColor }}>{`${title}: ${data.value.toLocaleString()}`}</p>
+          </div>
+        );
+      }
     }
     return null;
   };
