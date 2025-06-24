@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/table';
 import { Card } from '@/components/ui/Card';
 import { FaCircle } from 'react-icons/fa';
+import Image from 'next/image';
 
 export function CountryBreakdownTable() {
   // ---
@@ -132,13 +133,13 @@ export function CountryBreakdownTable() {
                 }
               >
                 <TableCell className="px-6 py-4 font-semibold text-zinc-700 dark:text-zinc-100 flex items-center gap-2">
-                  <img
+                  <Image
                     src={`https://flagcdn.com/48x36/${row.countryCode.toLowerCase()}.png`}
                     alt={row.country}
-                    style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', borderRadius: '2px', boxShadow: '0 0 2px #ccc' }}
-                    width={24}
-                    height={18}
-                    loading="lazy"
+                    width={18}
+                    height={14}
+                    style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', borderRadius: '2px' }}
+                    unoptimized
                   />
                   <FaCircle className={getStatusColor(row)} size={8} />
                   <span>{row.country}</span>
@@ -170,13 +171,13 @@ export function CountryBreakdownTable() {
           </div>
           <div className="flex flex-col items-center min-w-[120px]">
             <span className="flex items-center gap-2 text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-              <img
+              <Image
                 src={`https://flagcdn.com/48x36/${topMarket.countryCode.toLowerCase()}.png`}
                 alt={topMarket.country}
                 width={24}
                 height={18}
                 style={{ borderRadius: '2px', boxShadow: '0 0 2px #ccc' }}
-                loading="lazy"
+                unoptimized
               />
             </span>
             <span className="text-xs text-zinc-500 font-medium tracking-wide uppercase">Top Market</span>

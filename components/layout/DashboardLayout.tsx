@@ -63,7 +63,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <h1 className="text-2xl font-normal sm:text-3xl tracking-tight text-white dark:text-zinc-100 mb-2">
                 Your Empire is Growing, {session?.user?.name ? session.user.name.split(' ')[0]  : 'there'}
               </h1>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm">Here's how your business performed this month.</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm">Here&apos;s how your business performed this month.</p>
             </div>
             <div className="relative z-10 hidden items-center gap-4 lg:flex">
               <ThemeToggle />
