@@ -19,6 +19,7 @@ import { Youtube, Phone, DollarSign, Users, TrendingUp, Target, BadgePercent } f
 import dynamic from 'next/dynamic';
 import { CountryBreakdownTable } from '@/components/metrics/CountryBreakdownTable';
 import { SalesFunnelSummary } from '@/components/metrics/SalesFunnelSummary';
+import { TopVideosTable } from '@/components/youtube/TopVideosTable';
 
 const MonthlyLineChart = dynamic(
   () => import('@/components/metrics/MonthlyLineChart').then((mod) => mod.MonthlyLineChart),
@@ -64,43 +65,6 @@ const combineWithMockPerformance = (videos: YouTubeVideo[]): CombinedVideoData[]
     };
   });
 };
-
-function TopVideosTable({ videos }: { videos: any[] }) {
-  return (
-    <div className="w-full bg-white/60 dark:bg-[#202022] rounded-2xl shadow-md p-4 mb-8">
-      <div className="flex items-center justify-between mb-2">
-        <h2 className="text-xl font-semibold text-zinc-700 dark:text-zinc-100">Top Performing Videos</h2>
-        <a href="/dashboard/videos" className="text-blue-600 text-sm font-medium hover:underline">View All</a>
-      </div>
-      <table className="w-full">
-        <thead>
-          <tr className="text-xs text-zinc-500 uppercase">
-            <th className="text-left font-normal pb-2">Video Title</th>
-            <th className="text-right font-normal pb-2">Views</th>
-            <th className="text-right font-normal pb-2">Leads</th>
-            <th className="text-right font-normal pb-2">Closes</th>
-            <th className="text-right font-normal pb-2">Revenue</th>
-            <th className="text-right font-normal pb-2">$/View</th>
-            <th className="text-right font-normal pb-2">Convert %</th>
-          </tr>
-        </thead>
-        <tbody>
-          {videos.map((video) => (
-            <tr key={video.videoId} className="border-t border-zinc-100 dark:border-zinc-800">
-              <td className="py-2 pr-2 text-zinc-700 dark:text-zinc-100 font-medium text-left max-w-[220px] truncate">{video.title}</td>
-              <td className="py-2 text-right">{video.stats?.viewCount?.toLocaleString() ?? '-'}</td>
-              <td className="py-2 text-right">{video.leadsGenerated ?? '-'}</td>
-              <td className="py-2 text-right">{video.closedDeals ?? '-'}</td>
-              <td className="py-2 text-right text-green-600 font-semibold">${video.revenue?.toLocaleString() ?? '-'}</td>
-              <td className="py-2 text-right text-green-600">${video.revenuePerView?.toFixed(2) ?? '-'}</td>
-              <td className="py-2 text-right text-blue-600 font-medium">{video.viewToCloseRate?.toFixed(1) ?? '-'}%</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 export default function Dashboard() {
   const { 
@@ -327,13 +291,7 @@ export default function Dashboard() {
               <div>
                 {/* FunnelChart totalViews={totalYoutubeViews} removed, replaced by funnel summary row above */}
               </div>
-              <div>
-                <TopVideoCard 
-                  video={topPerformer}
-                  metricLabel="Total Revenue"
-                  metricValue={formatValue(topPerformer?.revenue || 0, 'currency')}
-                />
-              </div>
+            
             </div>
           </TabsContent>
 
@@ -377,13 +335,20 @@ export default function Dashboard() {
              )}
           </TabsContent>
         </Tabs>
+
+        <div className="mt-6 sm:mt-8">
+           <TopVideosTable videos={[...combinedData].sort((a, b) => (b.revenue || 0) - (a.revenue || 0)).slice(0, 5)} />
+        </div>
+
+     
+
         {/* ---
-          Plain language: This is where we show the country breakdown table.
+          This is where we show the country breakdown table.
           The table is now left-aligned with the rest of the dashboard content.
         --- */}
-        <h2 className="text-2xl font-semibold mt-12 mb-4 text-zinc-600 dark:text-zinc-200">Country Breakdown</h2>
+        
         <CountryBreakdownTable />
-        <TopVideosTable videos={[...combinedData].sort((a, b) => (b.revenue || 0) - (a.revenue || 0)).slice(0, 5)} />
+       
       </div>
     </DashboardLayout>
   );

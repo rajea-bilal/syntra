@@ -75,9 +75,8 @@ export const SalesFunnelSummary: React.FC<SalesFunnelSummaryProps> = ({
 
   return (
     <div className="w-full flex flex-col items-center mt-8 bg-white/80 backdrop-blur-lg border border-white/30 dark:bg-[#202022] dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4">
-      <h3 className="text-lg font-semibold mb-4 text-zinc-700 dark:text-zinc-200 flex items-center gap-2">
-        {/* You can add an icon here if you want */}
-        <span>Complete Sales Funnel</span>
+      <h3 className="text-lg font-semibold text-left mb-4 text-zinc-700 dark:text-zinc-200">
+      <span>Complete Sales Funnel</span>
       </h3>
       <div className="flex flex-col md:flex-row gap-4 w-full justify-center items-center">
         {stages.map((stage, idx) => (
