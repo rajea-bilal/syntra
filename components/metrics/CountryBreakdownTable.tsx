@@ -132,7 +132,7 @@ export function CountryBreakdownTable() {
                     : 'hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors'
                 }
               >
-                <TableCell className="px-6 py-4 font-semibold text-zinc-700 dark:text-zinc-100 flex items-center gap-2">
+                <TableCell className="px-6 py-4 font-normal text-xs text-zinc-700 dark:text-zinc-100 flex items-center gap-2">
                   <Image
                     src={`https://flagcdn.com/48x36/${row.countryCode.toLowerCase()}.png`}
                     alt={row.country}
@@ -144,10 +144,10 @@ export function CountryBreakdownTable() {
                   <FaCircle className={getStatusColor(row)} size={8} />
                   <span>{row.country}</span>
                 </TableCell>
-                <TableCell className="px-6 py-4 text-right font-medium text-zinc-700 dark:text-zinc-100">{row.leads}</TableCell>
-                <TableCell className="px-6 py-4 text-right font-medium text-zinc-700 dark:text-zinc-100">{row.callsBooked}</TableCell>
-                <TableCell className="px-6 py-4 text-right font-medium text-zinc-700 dark:text-zinc-100">{row.callsAccepted}</TableCell>
-                <TableCell className="px-6 py-4 text-right font-semibold text-green-600 dark:text-green-400">${row.revenue.toLocaleString()}</TableCell>
+                <TableCell className="text-sm px-6 py-4 text-right font-semibold     text-zinc-600 dark:text-zinc-100">{row.leads}</TableCell>
+                <TableCell className="text-sm px-6 py-4 text-right font-semibold text-zinc-600 dark:text-zinc-100">{row.callsBooked}</TableCell>
+                <TableCell className="text-sm px-6 py-4 text-right font-semibold text-zinc-600 dark:text-zinc-100">{row.callsAccepted}</TableCell>
+                <TableCell className="text-sm px-6 py-4 text-right font-semibold text-green-600 dark:text-green-400">${row.revenue.toLocaleString()}</TableCell>
                 <TableCell className="px-6 py-4 text-right">
                   <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${row.conversionRate === 0 ? 'bg-red-50 text-red-500' : 'bg-green-50 text-green-600'}`}>{(row.conversionRate * 100).toFixed(1)}%</span>
                 </TableCell>
