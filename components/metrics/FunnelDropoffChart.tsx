@@ -189,11 +189,11 @@ export const FunnelDropoffChart = ({ totalViews }: FunnelDropoffChartProps) => {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="font-semibold text-left text-zinc-500 dark:text-zinc-200">Stage</TableHead>
-                          <TableHead className="font-semibold text-right text-zinc-500 dark:text-zinc-200">Count</TableHead>
-                          <TableHead className="font-semibold text-right text-zinc-500 dark:text-zinc-200">Conversion Rate</TableHead>
-                          <TableHead className="font-semibold text-right text-zinc-500 dark:text-zinc-200">Drop-off Rate</TableHead>
-                          <TableHead className="font-semibold text-right text-zinc-500 dark:text-zinc-200">Action Needed</TableHead>
+                          <TableHead className="font-normal text-left text-zinc-500">Stage</TableHead>
+                          <TableHead className="font-normal text-right text-zinc-500">Count</TableHead>
+                          <TableHead className="font-normal text-right text-zinc-500">Conversion Rate</TableHead>
+                          <TableHead className="font-normal text-right text-zinc-500">Drop-off Rate</TableHead>
+                          <TableHead className="font-normal text-right text-zinc-500">Action Needed</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>

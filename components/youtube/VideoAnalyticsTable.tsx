@@ -240,7 +240,7 @@ export function VideoAnalyticsTable({ data = [], isLoading }: VideoAnalyticsTabl
                   {headerGroup.headers.map(header => (
                     <TableHead 
                       key={header.id} 
-                      className={`p-4 dark:text-zinc-400 ${header.column.id !== 'title' ? 'text-right' : ''}`}
+                      className={`p-4 font-normal text-zinc-500 ${header.column.id !== 'title' ? 'text-right' : ''}`}
                     >
                       {header.isPlaceholder
                         ? null

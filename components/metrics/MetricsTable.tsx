@@ -57,7 +57,7 @@ export default function MetricsTable({ columns, data, loading }: MetricsTablePro
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="px-4 py-2 text-left cursor-pointer select-none text-zinc-600 dark:text-zinc-300"
+                className="px-4 py-2 text-left cursor-pointer select-none font-normal text-zinc-500"
                 onClick={() => handleSort(col.key)}
               >
                 {col.label}

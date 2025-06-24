@@ -89,7 +89,7 @@ export const MonthlyMetricsTable = ({ data }: MonthlyMetricsTableProps) => {
               {columns.map(col => (
                 <TableHead 
                   key={col.key} 
-                  className="text-zinc-500 dark:text-zinc-400 text-right cursor-pointer select-none"
+                  className="font-normal text-zinc-500 text-right cursor-pointer select-none"
                   onClick={() => {
                     if (sortKey === col.key) setSortAsc(asc => !asc);
                     else {

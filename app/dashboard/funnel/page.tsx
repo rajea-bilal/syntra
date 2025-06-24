@@ -44,8 +44,11 @@ export default function FunnelPage() {
           </Card>
         ) : (
           <>
-          <FunnelChart totalViews={totalYoutubeViews} />
-         <FunnelDropoffChart totalViews={totalYoutubeViews} />
+          {/* ---
+            Plain language: Removed the old FunnelChart bar chart. Only showing FunnelDropoffChart or other components you want.
+          --- */}
+          {/* <FunnelChart totalViews={totalYoutubeViews} /> */}
+          <FunnelDropoffChart totalViews={totalYoutubeViews} />
           </>
         )}
       </div>
