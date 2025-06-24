@@ -2,10 +2,12 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Globe, LayoutDashboard, Video, BarChart3, Shuffle, Settings } from 'lucide-react';
+import { LayoutDashboard, Video, BarChart3, Shuffle, Settings } from 'lucide-react';
 import { ThemeToggle } from "./ThemeToggle";
 import { useState } from 'react';
 import React from 'react';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
@@ -19,6 +21,7 @@ export function Sidebar({ className }: { className?: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const [navigatingTo, setNavigatingTo] = useState<string | null>(null);
+  const { theme } = useTheme();
 
   // Listen for route changes to reset navigation state
   // This effect will run on every pathname change
@@ -31,8 +34,14 @@ export function Sidebar({ className }: { className?: string }) {
   return (
     <aside className={cn("hidden lg:flex flex-col w-64 bg-white dark:bg-zinc-700/10 border-r border-zinc-200 dark:border-zinc-800 p-4", className)}>
       <div className="flex items-center mb-8">
-        <Globe size={24} className="text-zinc-500" />
-        <h1 className="ml-2 text-xl font-semibold tracking-tight text-zinc-500 dark:text-zinc-300">Syntra</h1>
+        <Image 
+          src={theme === 'dark' ? "/syntra-logo.png" : "/syntra-dark.png"}
+          alt="Syntra Logo" 
+          width={55} 
+          height={60} 
+          className="text-zinc-500"
+        />
+        <h1 className="ml-2 text-xl font-semibold tracking-tight text-zinc-700 dark:text-zinc-300">Syntra</h1>
       </div>
       <hr className="border-zinc-200 dark:border-zinc-800 mb-4" />
       <ul className="flex-1 flex flex-col gap-1">

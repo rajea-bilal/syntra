@@ -229,3 +229,10 @@
 .dark .glow-gradient-border:hover {
   box-shadow: 0 0 48px 16px rgba(244, 114, 182, 0.30), 0 0 64px 16px rgba(6, 182, 212, 0.18);
 }
+
+.gradient-username {
+  background-image: linear-gradient(90deg, #F5C09A 0%, #D6B3E6 25%, #C1B3EA 50%, #8CB3F2 75%, #7FC6F2 100%);
+}
+.dark .gradient-username {
+  background-image: linear-gradient(90deg, #e2969f 0%, #e8c0c2 25%, #b96b7d 50%, #7f83c1 75%, #b0c3ec 100%);
+}

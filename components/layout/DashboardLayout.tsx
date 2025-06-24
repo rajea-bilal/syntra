@@ -5,6 +5,7 @@ import { Sidebar } from '../ui/sidebar';
 import { MobileSidebar } from '../ui/MobileSidebar';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '@/components/ui/button';
+import NotAuthenticated from './NotAuthenticated';
 
 // Placeholder imports for shadcn/ui components (replace with actual imports as you add them)
 // import { Sidebar } from '../ui/sidebar';
@@ -27,17 +28,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   if (!isAuthenticated) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen gap-4 text-center bg-background text-foreground">
-              <h1 className="text-2xl font-bold">Connect Your Account</h1>
-              <p className="max-w-md">
-                To get started, please sign in with your Google account. This will allow us to fetch live data from your YouTube channel and display your analytics.
-              </p>
-              <Button onClick={() => signIn('google')}>
-                Sign In with Google
-              </Button>
-            </div>
-    );
+    return <NotAuthenticated />;
   }
 
   return (
@@ -61,7 +52,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="relative z-10">
              
               <h1 className="text-2xl font-normal sm:text-3xl tracking-tight text-white dark:text-zinc-100 mb-2">
-                Your Empire is Growing, {session?.user?.name ? session.user.name.split(' ')[0]  : 'there'}
+                Your Empire is Growing,{" "}
+                <span
+                  className="font-extrabold bg-clip-text text-transparent gradient-username"
+                >
+                  {session?.user?.name ? session.user.name.split(' ')[0] : 'there'}
+                </span>
               </h1>
               <p className="text-zinc-500 dark:text-zinc-400 text-sm">Here&apos;s how your business performed this month.</p>
             </div>

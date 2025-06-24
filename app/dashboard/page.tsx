@@ -20,6 +20,7 @@ import dynamic from 'next/dynamic';
 import { CountryBreakdownTable } from '@/components/metrics/CountryBreakdownTable';
 import { SalesFunnelSummary } from '@/components/metrics/SalesFunnelSummary';
 import { TopVideosTable } from '@/components/youtube/TopVideosTable';
+import NotAuthenticated from '@/components/layout/NotAuthenticated';
 
 const MonthlyLineChart = dynamic(
   () => import('@/components/metrics/MonthlyLineChart').then((mod) => mod.MonthlyLineChart),
@@ -67,6 +68,13 @@ const combineWithMockPerformance = (videos: YouTubeVideo[]): CombinedVideoData[]
 };
 
 export default function Dashboard() {
+  // TODO: Replace with real authentication logic
+  const isAuthenticated = true; // <--- Set to false to test unauthenticated UI
+
+  if (!isAuthenticated) {
+    return <NotAuthenticated />;
+  }
+
   const { 
     data: videoAnalytics, 
     isLoading: isYoutubeLoading, 
