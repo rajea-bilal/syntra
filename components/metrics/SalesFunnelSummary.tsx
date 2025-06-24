@@ -105,7 +105,7 @@ export const SalesFunnelSummary: React.FC<SalesFunnelSummaryProps> = ({
   const { overallConversion, viewsPerClose, avgDealSize } = calculateSummaryStats();
 
   return (
-    <div className="w-full bg-white/95 backdrop-blur-lg border border-white/40 dark:bg-zinc-900/95 dark:border-zinc-700/50 shadow-lg rounded-2xl p-6 mt-6 ">
+    <div className="w-full bg-white/95 backdrop-blur-lg border border-white/40 dark:bg-zinc-700/30 dark:border-zinc-700/50 shadow-lg rounded-2xl p-6 mt-6 ">
       <FunnelHeader />
       <DesktopFunnelView stages={stages} />
       <MobileFunnelView stages={stages} />
@@ -150,14 +150,14 @@ const MobileFunnelView: React.FC<{ stages: FunnelStage[] }> = ({ stages }) => (
 
 const StageCard: React.FC<{ stage: FunnelStage }> = ({ stage }) => (
   <div 
-    className="relative group flex-1 min-w-0 max-w-[180px] bg-white dark:bg-zinc-900 border-2 rounded-xl p-4 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
+    className="relative group flex-1 min-w-0 max-w-[180px] bg-white dark:bg-zinc-900/80 border-2 rounded-xl p-4 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
     style={{ borderColor: stage.borderColor }}
   >
-    <div className="font-semibold text-xl lg:text-2xl text-zinc-600 mb-3">
+    <div className="font-semibold text-xl lg:text-2xl text-zinc-600 dark:text-zinc-200 mb-3">
       {stage.value}
     </div>
     
-    <div className="text-xs text-zinc-600 dark:text-zinc-400 font-normal mb-3">
+    <div className="text-xs text-zinc-600 dark:text-zinc-300/80 font-normal mb-3">
       {stage.label}
     </div>
     
@@ -249,10 +249,10 @@ const SummaryStat: React.FC<{
   isRevenue?: boolean;
 }> = ({ value, label, isRevenue = false }) => (
   <div>
-    <div className={`text-lg ${isRevenue ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'text-zinc-700 font-semibold'}`}>
+    <div className={`text-lg ${isRevenue ? 'text-emerald-600 dark:text-emerald-400 dark:text-emerald-400 font-semibold' : 'text-zinc-700 font-semibold dark:text-zinc-200'}`}>
       {value}
     </div>
-    <div className="text-xs text-zinc-700 dark:text-zinc-300 font-normal">
+    <div className="text-xs text-zinc-700 dark:text-zinc-300/70  font-normal">
       {label}
     </div>
   </div>

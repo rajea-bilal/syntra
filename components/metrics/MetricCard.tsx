@@ -63,7 +63,7 @@ export function MetricCard({ title, value, previousValue, format = "number", cap
   const styles = variantStyles[variant];
 
   return (
-    <Card className={`bg-white/80 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-2 flex items-stretch `}>
+    <Card className={`bg-white/80 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl dark:bg-zinc-700/30 p-2 flex items-stretch `}>
       <div className={`w-1  dark:hidden rounded-full mr-4`}></div>
       <div className="flex-1 flex flex-col justify-center">
         <p className="text-xs mb-2 text-zinc-500/80 dark:text-zinc-400">{title}</p>

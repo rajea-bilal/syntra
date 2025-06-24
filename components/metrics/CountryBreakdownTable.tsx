@@ -85,7 +85,7 @@ export function CountryBreakdownTable() {
   return (
     <div className="w-full">
      
-      <Card className="w-full bg-white/80 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4">
+      <Card className="w-full bg-white/80 backdrop-blur-lg border border-white/30 dark:bg-zinc-700/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4">
        <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-100 mb-4">Country Breakdown</h2>
         <Table className="w-full">
           <TableHeader>

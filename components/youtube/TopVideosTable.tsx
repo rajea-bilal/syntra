@@ -18,7 +18,7 @@ interface TopVideosTableProps {
 export function TopVideosTable({ videos }: TopVideosTableProps) {
   return (
     <div className="w-full">
-      <Card className="w-full bg-white/80 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4 mb-8">
+      <Card className="w-full bg-white/80 backdrop-blur-lg border border-white/30 dark:bg-zinc-700/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4 mb-8">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-100 mb-4">Top Performing Videos</h2>
           <a href="/dashboard/videos" className="text-blue-600 text-sm font-medium hover:underline">View All</a>
