@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+   safelist: [
+    'sidebar-neon',
+  ],
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',

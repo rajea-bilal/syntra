@@ -91,7 +91,7 @@ export function MonthlyLineChart({ data, metricKey, title }: MonthlyLineChartPro
 
   return (
     <Card className="p-4 bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl">
-      <h3 className="text-lg font-semibold mb-4">{title}</h3>
+      <h3 className="text-lg font-semibold mb-4 text-zinc-500 dark:text-zinc-300">{title}</h3>
       <div style={{ height: 300 }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>

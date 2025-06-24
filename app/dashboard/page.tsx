@@ -77,6 +77,8 @@ export default function Dashboard() {
       }
       return response.json();
     },
+    staleTime: 24 * 60 * 60 * 1000, // 24 hours
+    gcTime: 25 * 60 * 60 * 1000, // 25 hours
   });
 
   const { 

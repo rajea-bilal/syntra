@@ -50,10 +50,10 @@ export default function AnalyticsPage() {
     <DashboardLayout>
       <div className="space-y-8 p-4 sm:p-6 lg:p-8">
         <header>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+          <h1 className="text-3xl font-normal tracking-tight text-zinc-500 dark:text-gray-100">
             Performance Trends
           </h1>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-1 text-sm text-zinc-500/80 dark:text-gray-400">
             Track your month-over-month growth for key funnel metrics.
           </p>
         </header>
@@ -72,14 +72,14 @@ export default function AnalyticsPage() {
         </div>
 
         <Card>
-          <h2 className="p-4 text-lg font-semibold">
+          <h2 className="p-4 text-lg font-semibold text-zinc-500 dark:text-zinc-300">
             Funnel Conversion Rate (%)
           </h2>
           <MonthlyBarChart data={metrics} />
         </Card>
 
         <Card>
-          <h2 className="p-4 text-lg font-semibold">
+          <h2 className="p-4 text-lg font-semibold text-zinc-500 dark:text-zinc-300">
             Monthly Metrics Breakdown
           </h2>
           <MonthlyMetricsTable data={metrics} />

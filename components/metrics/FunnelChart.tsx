@@ -71,7 +71,7 @@ export const FunnelChart = ({ totalViews }: FunnelChartProps) => {
   return (
     <Card className="dark:bg-[#222224] shadow-lg bg-white/60 backdrop-blur-lg border border-white/30 dark:border-zinc-800/90 dark:shadow-md dark:shadow-black/30 shadow-md rounded-2xl p-4">
       <div className="p-6">
-        <h3 className="text-lg font-semibold mb-4 dark:text-zinc-300">Sales Funnel</h3>
+       
         <div style={{ height: 360, width: '100%' }}>
           <ResponsiveContainer>
             <BarChart

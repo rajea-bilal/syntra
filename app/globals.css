@@ -178,3 +178,32 @@
   background-image: none !important;
   background-color: #1B1B1D !important;
 }
+
+/* --- Neon sidebar highlight for dark mode (Tailwind .dark class) --- */
+.dark .sidebar-neon::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 0;
+  bottom: 4px;
+  width: 12px;
+  border-radius: 8px;
+  background: red; /* DEBUG: solid red for visibility */
+  box-shadow: none;
+  opacity: 1;
+  transition: opacity 0.3s, box-shadow 0.3s;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dark .sidebar-neon {
+  z-index: 0;
+}
+
+
+/* Ensure smooth transition for removal */
+@media (prefers-color-scheme: dark) {
+  .sidebar-neon:not(:hover):not(:focus)::after {
+    opacity: 1;
+  }
+}

@@ -56,7 +56,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     cell: ({ row }) => {
       const video = row.original;
       return (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
           <Image
             width={48}
             height={40}
@@ -64,7 +64,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
             src={video.thumbnailUrl}
             alt={video.title}
           />
-          <span className="font-medium dark:text-zinc-400">{video.title}</span>
+          <span className="font-medium text-zinc-500 dark:text-zinc-400">{video.title}</span>
         </div>
       );
     },
@@ -73,7 +73,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'stats.viewCount',
     header: ({ column }) => (
       <div 
-        className="flex items-center justify-end cursor-pointer select-none"
+        className="flex text-zinc-500 dark:text-zinc-400 items-center justify-end cursor-pointer select-none"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Views
@@ -86,7 +86,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'stats.likeCount',
     header: ({ column }) => (
         <div 
-          className="flex items-center justify-end cursor-pointer select-none"
+          className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Likes
@@ -99,7 +99,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'leadsGenerated',
     header: ({ column }) => (
       <div 
-        className="flex items-center justify-end cursor-pointer select-none"
+        className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Leads
@@ -112,7 +112,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'callsBooked',
     header: ({ column }) => (
         <div 
-          className="flex items-center justify-end cursor-pointer select-none"
+          className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Calls Booked
@@ -125,7 +125,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'callsAccepted',
     header: ({ column }) => (
         <div 
-          className="flex items-center justify-end cursor-pointer select-none"
+          className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Calls Accepted
@@ -138,7 +138,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'closedDeals',
     header: ({ column }) => (
         <div 
-          className="flex items-center justify-end cursor-pointer select-none"
+          className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Closes
@@ -151,7 +151,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'revenue',
     header: ({ column }) => (
         <div 
-          className="flex items-center justify-end cursor-pointer select-none"
+          className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Revenue
@@ -167,7 +167,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'revenuePerView',
     header: ({ column }) => (
         <div 
-          className="flex items-center justify-end cursor-pointer select-none"
+          className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Revenue/View
@@ -180,7 +180,7 @@ export const columns: ColumnDef<CombinedVideoData>[] = [
     accessorKey: 'viewToCloseRate',
     header: ({ column }) => (
         <div 
-          className="flex items-center justify-end cursor-pointer select-none"
+          className="flex items-center justify-end cursor-pointer select-none text-zinc-500 dark:text-zinc-400"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           View-to-Close Rate

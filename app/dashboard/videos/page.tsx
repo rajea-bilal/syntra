@@ -45,6 +45,8 @@ export default function VideosPage() {
       }
       return res.json();
     },
+    staleTime: 24 * 60 * 60 * 1000, // 24 hours
+    gcTime: 25 * 60 * 60 * 1000, // 25 hours
   });
 
   const combinedData = useMemo(() => {
@@ -55,7 +57,7 @@ export default function VideosPage() {
   return (
     <DashboardLayout>
       <div className="container mx-auto p-4 md:p-6 lg:p-8">
-        <h1 className="text-3xl font-bold mb-6">Video Performance</h1>
+        <h1 className="text-3xl font-normal text-zinc-500 dark:text-zinc-300 tracking-tight mb-6">Video Performance</h1>
         {error ? (
           <div className="text-red-500 text-center p-8 border rounded-lg">
             <p>Error loading data:</p>
