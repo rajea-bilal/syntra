@@ -29,7 +29,7 @@ export function Sidebar({ className }: { className?: string }) {
   }, [pathname, navigatingTo]);
 
   return (
-    <aside className={cn("hidden lg:flex flex-col w-64 bg-zinc-50 dark:bg-zinc-900/50 border-r border-zinc-200 dark:border-zinc-800 p-4", className)}>
+    <aside className={cn("hidden lg:flex flex-col w-64 bg-white dark:bg-zinc-700/10 border-r border-zinc-200 dark:border-zinc-800 p-4", className)}>
       <div className="flex items-center mb-8">
         <Globe size={24} className="text-zinc-500" />
         <h1 className="ml-2 text-xl font-semibold tracking-tight text-zinc-500 dark:text-zinc-300">Syntra</h1>

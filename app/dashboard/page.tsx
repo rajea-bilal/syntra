@@ -186,7 +186,7 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className="w-full px-3 sm:px-4 lg:px-6 xl:px-8 flex flex-col gap-6">
+      <div className="w-full px-3 sm:px-4 lg:px-6 xl:px-8 flex flex-col gap-2">
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className="grid w-full grid-cols-4 mb-6 shadow shadow-black/10 dark:shadow-black/30">
             <TabsTrigger className="text-zinc-500 dark:text-zinc-400" value="overview">Overview</TabsTrigger>
@@ -197,7 +197,7 @@ export default function Dashboard() {
           
           <TabsContent value="overview">
             {/* ---
-              Plain language: Two rows of metric cards, each with three cards, all the same size (no spanning), matching the reference image layout.
+              Two rows of metric cards, each with three cards, all the same size (no spanning), matching the reference image layout.
             --- */}
             <div className="grid gap-4 md:grid-cols-3 mb-4">
               <MetricCard
@@ -286,13 +286,7 @@ export default function Dashboard() {
               callsAccepted={latestMetrics?.acceptedCalls || 0}
               totalCloses={(latestMetrics?.closes?.highTicket || 0) + (latestMetrics?.closes?.discount || 0)}
             />
-            {/* --- End of funnel summary row --- */}
-            <div className="mt-6 sm:mt-8 space-y-6">
-              <div>
-                {/* FunnelChart totalViews={totalYoutubeViews} removed, replaced by funnel summary row above */}
-              </div>
-            
-            </div>
+           
           </TabsContent>
 
           <TabsContent value="video">
