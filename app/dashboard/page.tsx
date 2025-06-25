@@ -71,10 +71,7 @@ export default function Dashboard() {
   // TODO: Replace with real authentication logic
   const isAuthenticated = true; // <--- Set to false to test unauthenticated UI
 
-  if (!isAuthenticated) {
-    return <NotAuthenticated />;
-  }
-
+  // Always call hooks at the top level
   const { 
     data: videoAnalytics, 
     isLoading: isYoutubeLoading, 
@@ -91,6 +88,7 @@ export default function Dashboard() {
     },
     staleTime: 24 * 60 * 60 * 1000, // 24 hours
     gcTime: 25 * 60 * 60 * 1000, // 25 hours
+    enabled: isAuthenticated,
   });
 
   const { 
@@ -145,6 +143,7 @@ export default function Dashboard() {
 
       return combinedMetrics;
     },
+    enabled: isAuthenticated,
   });
 
   const combinedData = useMemo(() => {
@@ -169,6 +168,11 @@ export default function Dashboard() {
   const isLoading = isYoutubeLoading || isMetricsLoading;
   const error = youtubeError || metricsError;
 
+  // Only now, after all hooks, do conditional returns
+  if (!isAuthenticated) {
+    return <NotAuthenticated />;
+  }
+
   if (isLoading) {
     return (
       <DashboardLayout>
@@ -188,7 +192,7 @@ export default function Dashboard() {
       </DashboardLayout>
     );
   }
-  
+
   const latestMetrics = metrics?.[metrics.length - 1];
   const prevMetrics = metrics?.[metrics.length - 2] || latestMetrics;
 
