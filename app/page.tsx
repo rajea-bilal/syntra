@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LandingPage() {
   return (
@@ -7,8 +8,13 @@ export default function LandingPage() {
       className="relative flex min-h-screen flex-col items-start justify-end bg-cover bg-center bg-no-repeat p-8 md:p-24"
       style={{ backgroundImage: "url('/dashboard-header.png')" }}
     >
-      <div className="absolute inset-0 bg-black/50" />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 z-0 pointer-events-none" style={{background: 'linear-gradient(90deg, rgba(20,20,30,0.85) 0%, rgba(20,20,30,0.5) 60%, rgba(20,20,30,0) 100%)'}} />
       <div className="relative z-10 max-w-3xl text-white">
+        <div className="flex items-center gap-3 mb-8">
+          <Image src="/syntra-logo.png" alt="Syntra Logo" width={48} height={48} className="drop-shadow-lg" />
+          <span className="text-3xl md:text-4xl font-bold tracking-tight text-white drop-shadow-lg">Syntra</span>
+        </div>
         <div className="mb-4 inline-flex items-center gap-x-2 rounded-full bg-white/20 px-3 py-1 text-sm font-medium backdrop-blur-sm">
           <span className="relative z-10">For coaches ready to scale with data, not hunches</span>
         </div>
