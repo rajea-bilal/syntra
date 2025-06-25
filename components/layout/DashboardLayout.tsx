@@ -6,6 +6,7 @@ import { MobileSidebar } from '../ui/MobileSidebar';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import NotAuthenticated from './NotAuthenticated';
+import Image from 'next/image';
 
 // Placeholder imports for shadcn/ui components (replace with actual imports as you add them)
 // import { Sidebar } from '../ui/sidebar';
@@ -51,13 +52,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="absolute inset-0 rounded-2xl" />
             <div className="relative z-10">
              
-              <h1 className="text-2xl font-normal sm:text-3xl tracking-tight text-white dark:text-zinc-100 mb-2">
-                Your Empire is Growing,{" "}
-                <span
-                  className="font-extrabold bg-clip-text text-transparent gradient-username"
-                >
+              <h1 className="text-2xl font-normal sm:text-3xl tracking-tight text-zinc-600/70 dark:text-zinc-100 flex items-center">
+                Your Empire is Growing,
+                <span className="font-semibold text-zinc-600/70 dark:text-zinc-400 ml-2">
                   {session?.user?.name ? session.user.name.split(' ')[0] : 'there'}
                 </span>
+                
+                <Image
+                  src="/rocket.png"
+                  alt="Rocket"
+                  width={80}
+                  height={70}
+                  className="inline-block align-middle"
+                />
               </h1>
               <p className="text-zinc-500 dark:text-zinc-400 text-sm">Here&apos;s how your business performed this month.</p>
             </div>

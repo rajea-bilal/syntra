@@ -231,7 +231,7 @@
 }
 
 .gradient-username {
-  background-image: linear-gradient(90deg, #F5C09A 0%, #D6B3E6 25%, #C1B3EA 50%, #8CB3F2 75%, #7FC6F2 100%);
+  background-image: linear-gradient(90deg, #ec989c 25%, #b4a3e6 50%, #6899e7 75%, #66b2e0 100%);
 }
 .dark .gradient-username {
   background-image: linear-gradient(90deg, #e2969f 0%, #e8c0c2 25%, #b96b7d 50%, #7f83c1 75%, #b0c3ec 100%);
