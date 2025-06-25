@@ -21,6 +21,7 @@ import { CountryBreakdownTable } from '@/components/metrics/CountryBreakdownTabl
 import { SalesFunnelSummary } from '@/components/metrics/SalesFunnelSummary';
 import { TopVideosTable } from '@/components/youtube/TopVideosTable';
 import NotAuthenticated from '@/components/layout/NotAuthenticated';
+import { useSession } from 'next-auth/react';
 
 const MonthlyLineChart = dynamic(
   () => import('@/components/metrics/MonthlyLineChart').then((mod) => mod.MonthlyLineChart),
@@ -68,8 +69,8 @@ const combineWithMockPerformance = (videos: YouTubeVideo[]): CombinedVideoData[]
 };
 
 export default function Dashboard() {
-  // TODO: Replace with real authentication logic
-  const isAuthenticated = true; // <--- Set to false to test unauthenticated UI
+  const { status } = useSession();
+  const isAuthenticated = status === 'authenticated';
 
   // Always call hooks at the top level
   const { 
